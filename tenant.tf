@@ -1,3 +1,16 @@
+resource "auth0_tenant" "tenant" {
+  friendly_name           = "My Company"
+  flags {
+    enable_client_connections = false
+  }
+}
+
+resource "auth0_prompt" "my_prompt" {
+  universal_login_experience     = "new"
+  identifier_first               = false
+  webauthn_platform_first_factor = false
+}
+
 # terraform import auth0_connection.Username-Password-Authentication  con_UZwhZkh05jv7Gsg0
 resource "auth0_connection" "Username-Password-Authentication" {
   name     = "Username-Password-Authentication"
@@ -86,7 +99,8 @@ resource "auth0_connection_clients" "UPA-clients" {
     "zkcQH5K64DDs2cQ1BPPO4ww5TmE0OQWf",
     auth0_client.session_transfer_spa.client_id,
     auth0_client.session_transfer_native.client_id,
-    auth0_client.cf-hono-oidc-rwa.client_id
+    auth0_client.cf-hono-oidc-rwa.client_id,
+    auth0_client.dubai-spa.client_id
   ]
 
 }

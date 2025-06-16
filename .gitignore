@@ -4,3 +4,5 @@ terraform.auto.tfvars
 .idea
 *.plan
 terraform.tfstate*
+events
+token-exchange-switch-client.tf
