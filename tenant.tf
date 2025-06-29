@@ -3,6 +3,14 @@ resource "auth0_tenant" "tenant" {
   flags {
     enable_client_connections = false
   }
+
+  # Configure supported languages
+  enabled_locales = [
+    "en",
+    "fr-CA",
+    "fr",
+    "ar"
+  ]
 }
 
 resource "auth0_prompt" "my_prompt" {
@@ -23,72 +31,48 @@ resource "auth0_connection_clients" "UPA-clients" {
     "05NYEth4OY9i57lIrnp9sQCyM1RjcwSJ",
     "0nO2Ub251AHCDy0KWLfBkqYVRyhay27S",
     "2JE0nh0aoPd26yS0K8tandZLVtwwMkDK",
-    "3ena7hVE0pj7Y00OuRQqgyvjSiff7ZBr",
-    "4rZ1k9WeSQGPXt4ryMPQKqUpBBzJK5Ie",
     "4yLCSBH2ww2v9W8OH1OPBmubNuVygLM0",
     "55GnDIKMb4s1ur0hibHrsNHGng4f8AUf",
     "5eqv0cI7bwKIBFQz7Mx2ccUz4UD677uj",
-    "5k6MkTpXmbRLFY45AEPe9paIRbloxgRo",
     "6DnlVYv5PKg2Lj9mXzZ6iW4ymqO0YnvC",
     "6KS0YSEQwsvE9qRqtzonX8SEgJEYVzVH",
     "6P6Kgpi9xfkL94Ubd4d32QXHbhHuUhQT",
     "6awtx57XeNg8M5SAiUo1tViox6IeeJC7",
-    "6yNgVX54F3Icug8WsOIpFj47upqF4A3K",
-    "7LDiuNEm9rQrwTFPDWpRTD0XQmw3bfgj",
     "8PqaR0qYna2NBM41AQc2OXnGyjZ49Rmr",
     "9FiDYRqbpqweVaNcywjSgJzM6RCuYwgE",
-    "AOQ4a81DJT2HHcTICi9ptGoHar0T0HIG",
     "At5IQTvLVMhalbVc0WZ07iKUyJtpXmkJ",
     "CP9VBSKZwQl13tsX8NH06w55Da3KWEto",
     "CPj0f9ReExLrfJwzqV3mw8UzAUyjZb1k",
     "DjUmggQQ7I0WMp64hCl7pUr4remtuhsX",
     "ED27SLierWMOj8SAsTY5H87fXsq1gRLO",
-    "FFCmyMxLVT1sJuJ1pFj03n7fLCz576rO",
     "FmAvP8pINU00SWX7YWODrQP7ibb9wqXO",
-    "GAASCyG94mB5iC8bZQXTj2iec7gA6Neb",
     "GPsbodIXephSGKE0eF4sPudC0xIlfuwJ",
     "HX00vu6n0QclPCeiHZhTbzC1njtz5LGC",
-    "Ipf1VSqdFOy4bYX7pfHPhYvIRJlvcSLQ",
     "JO98rqujSA1ERx7ue2KSlGalPHXSooOV",
-    "JQD6Tisp3zIpRrAHW0XKlTyYOGwJlEKt",
     "KkHXVNN6SDVmNsOJACwbni0t2t6dL2rE",
     "LPlbMBxjyAcKNF6EZdjD3Ifob1khp98Z",
     "LcI9FUSw6DcubRAOc7gTr0ASGmIalv4D",
-    "M0yrIba8b6l4T70Kl4B5h3N74gPRLMsM",
     "MSKK22Qu1MM26DkdP59psEbAY8MVuhfm",
     "Mv2ZGaqECztHaIy3ShmxNF15VBXBkump",
     "NrNY70wcQgvIqafjqYjhhhLSt7plEg3M",
     "PWUCWvydb903veyd93AfRm5HQjfryJqC",
     "QjpX6x1Xial9wVZqqVMBS04PXvZzaWV9",
     "RSoWHmn1CjvErYnrxZlNVGXCxrzfNyHe",
-    "UCsktpIsGtUeEv7NJjlJyrXKKefN11lp",
-    "UYc9G7FzqwWcsWYU5vXYfD68mdtyjaZq",
-    "V5qxnpiNc48a7owex47ogT3f3JhAhXJq",
     "VJIEWAptlFWokl2pRC2ptswic1jCGoEC",
-    "VeMJDqjseyEQW8jIAQNFXarSpu1wx7KZ",
     "XZxKS4tce5uFTbg1DqYVzR2qzgjO5PWx",
-    "Z4KiB5q0O5XsJdZYCkXxwUrmGZOd8L6n",
-    "ZoO1rMwD9NhBlM56qvIFfS5iXDJ9LWct",
-    "aCcI5dBez5KjUQV6VbrJo63NflhWhNsd",
     "baLYKQQuJbqt8jvrlfBEFrILtP4jeXk1",
-    "i8kOfzpljvbZC2dhPyPKc1NPGcSnai7T",
     "j168x4lrcx9gMHv9vh6nGdIKMq6Iwg22",
     "j9O52ys2lmIs7cYOPbxGgQNhMzY0mS7o",
     "ju7h6jf87VUZW8nkPl5084LNi9D9q9bH",
     "kXM5z5q4qdkB6vezdFi1aL2t4LNGGCZ1",
     "kpSiZowux5Ky7YX1IEK9UYTwjjR2Kf4g",
-    "oG3oZELBQz72VXmmELoF25VLRAH6REtv",
     "oXf1uIfg9Z7vbBzG3AimyIG4P0JoUTkB",
-    "opRSUVOnPF3ehAGUqexT0zl2ZPIH2U5f",
-    "p95G4m1qBJ6zcy0e4ggyL3jxV6skGEEY",
     "pOUgbo8yozEPlPKk2JcJYO1LxOPK7tLS",
     "pTWr4QrK4GMy093lDGd9a7DM7jtSyXIP",
-    "s1uMZ0tYZL0HL4hf4kFiU7SAxUXlSN5e",
     "tyS84I3IhppetSj5XXwbNeZgitjX0MrN",
     "uNrrt07AvtkEmYOfFKu3q25bI14v2ysu",
     "udBL9qJPxpoDFWBjiZmRopvXKAHz6LL5",
     "umMFHP0H0LyHXiavg38gYIqscp3dcaAw",
-    "vlndzXmUrMcc6UeT7AsV1vq2HPgGwYSr",
     "wMFg5PN32OPzAtBDkX1J2L90WJ2WG1Qf",
     "wf5DkZDJt4u60m1xelm2cOWH1MyMvezP",
     "ww0P2cA0kqPAskTxvAhTDcNkKZZzZ4LV",
@@ -100,7 +84,8 @@ resource "auth0_connection_clients" "UPA-clients" {
     auth0_client.session_transfer_spa.client_id,
     auth0_client.session_transfer_native.client_id,
     auth0_client.cf-hono-oidc-rwa.client_id,
-    auth0_client.dubai-spa.client_id
+    auth0_client.dubai-spa.client_id,
+    auth0_client.dpop-rwa.client_id
   ]
 
 }
