@@ -8,7 +8,9 @@ resource "auth0_client" "session_transfer_native" {
   is_first_party             = true
   oidc_conformant            = true
 
-  callbacks = []
+  callbacks = [
+    "https://jwt.io"
+  ]
   allowed_logout_urls = []
   web_origins = []
 
