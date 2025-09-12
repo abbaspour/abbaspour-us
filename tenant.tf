@@ -72,11 +72,27 @@ resource "auth0_connection_clients" "UPA-clients" {
     "yFGUSmuet2KJjPMv184Sbtw80YV6uPK7",
     "ujeEVt80TpFoTlYaAJ1Mp7wyl2W41v7i",   # mcd cdsso - app - solution 02
     "E1FfCkuVWwEBt7fYnTBY39zk6r72h3Li",   # mcd cdsso - spa - solution 02
+    "7Fjto9rKAk4eGQpjHTzBhD8KRg7Lk2od",   # n2w auth0 airline auziros-club
     auth0_client.session_transfer_spa.client_id,
     auth0_client.session_transfer_native.client_id,
     auth0_client.cf-hono-oidc-rwa.client_id,
     auth0_client.dubai-spa.client_id,
-    auth0_client.dpop-rwa.client_id
+    auth0_client.dpop-rwa.client_id,
+    auth0_client.ios-auth0-airlines.client_id,
+    var.auth0_tf_client_id
   ]
 
+}
+
+resource "auth0_user" "test-user" {
+  connection_name = auth0_connection.Username-Password-Authentication.name
+  email = "amin@atko.email"
+  password = "amin@atko.email"
+  custom_domain_header = "id.abbaspour.net"
+
+  app_metadata         = jsonencode(
+    {
+      crm_customer_id = 1234
+    }
+  )
 }

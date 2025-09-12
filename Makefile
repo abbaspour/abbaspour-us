@@ -29,6 +29,9 @@ clean:
 lint:
 	tflint
 
+init:
+	terraform init -input=false -upgrade
+
 graph:
 	$(TF) graph > graph.dot
 	dot -Tsvg graph.dot -o graph.svg
