@@ -1,6 +1,6 @@
 
 resource "auth0_client" "dubai-spa" {
-  name            = "My Application"
+  name            = "Dubai SPA Client RTL"
   app_type        = "spa"
   oidc_conformant = true
 
