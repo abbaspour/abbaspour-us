@@ -79,6 +79,7 @@ resource "auth0_connection_clients" "UPA-clients" {
     auth0_client.dubai-spa.client_id,
     auth0_client.dpop-rwa.client_id,
     auth0_client.ios-auth0-airlines.client_id,
+    auth0_client.mrrt-test-1.client_id,
     var.auth0_tf_client_id
   ]
 
