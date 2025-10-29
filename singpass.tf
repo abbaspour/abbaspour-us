@@ -26,11 +26,12 @@ resource "auth0_connection" "oidc" {
   options {
     client_id                       = "OMaeWMfqhId0wwR4FGs7gGgCDCUYNqgW"
     scopes                          = ["openid", "profile"]
-    # issuer                          = "https://id.abbaspour.net"
-    # authorization_endpoint          = "https://example.com"
-    # jwks_uri                        = "https://example.com/jwks"
+    issuer                          = "https://stg-id.singpass.gov.sg"
+    authorization_endpoint          = "https://stg-id.singpass.gov.sg/auth"
+    jwks_uri                        = "https://stg-id.singpass.gov.sg/.well-known/keys"
+    token_endpoint                  = "https://stg-id.singpass.gov.sg/token"
     type                            = "back_channel"
-    discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
+    #discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
     token_endpoint_auth_method      = "private_key_jwt"
     token_endpoint_auth_signing_alg = "RS256"
   }

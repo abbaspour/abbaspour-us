@@ -14,3 +14,13 @@ variable "auth0_tf_client_secret" {
   sensitive   = true
 }
 
+## LinkedIn Social
+variable "linkedin_client_id" {
+  type = string
+  description = "LinkedIn social connection client_id"
+}
+
+variable "linkedin_client_secret" {
+  type = string
+  description = "LinkedIn social connection client_secret"
+}
