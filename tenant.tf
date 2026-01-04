@@ -7,9 +7,8 @@ resource "auth0_tenant" "tenant" {
   # Configure supported languages
   enabled_locales = [
     "en",
-    "fr-CA",
-    "fr",
-    "ar"
+    "ar",
+    "fa"
   ]
 }
 
