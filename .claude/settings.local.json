@@ -6,7 +6,8 @@
       "WebFetch(domain:registry.terraform.io)",
       "Bash(terraform validate:*)",
       "Bash(terraform providers:*)",
-      "Bash(terraform fmt:*)"
+      "Bash(terraform fmt:*)",
+      "Bash(gh pr create:*)"
     ]
   }
 }
