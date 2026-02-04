@@ -58,7 +58,7 @@ resource "auth0_connection" "singpass" {
   strategy = "oidc"
 
   options {
-    client_id                       = "OMaeWMfqhId0wwR4FGs7gGgCDCUYNqgW"
+    client_id                       = "wgQVLL3CBULMXwwJkPncoBYypXEabGeD"
     scopes                          = ["openid"]
     issuer                          = "https://stg-id.singpass.gov.sg"
     authorization_endpoint          = "https://stg-id.singpass.gov.sg/auth"
@@ -66,12 +66,12 @@ resource "auth0_connection" "singpass" {
     #token_endpoint                  = "https://stg-id.singpass.gov.sg/token"
     #token_endpoint                  = "https://logging-token-endpoint.abbaspour.workers.dev"
     type                            = "back_channel"
-    #discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
+    discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
     token_endpoint_auth_method      = "private_key_jwt"
     token_endpoint_auth_signing_alg = "ES256"
-    #pkce_enabled = true
+    pkce_enabled = true
     connection_settings {
-      pkce = "auto"
+      pkce = "S256"
     }
   }
 }
