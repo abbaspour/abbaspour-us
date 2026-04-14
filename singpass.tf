@@ -69,7 +69,7 @@ resource "auth0_connection" "singpass" {
     discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
     token_endpoint_auth_method      = "private_key_jwt"
     token_endpoint_auth_signing_alg = "ES256"
-    pkce_enabled = true
+    #pkce_enabled = true
     connection_settings {
       pkce = "S256"
     }
