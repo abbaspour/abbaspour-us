@@ -32,6 +32,11 @@ resource "auth0_trigger_actions" "post-login" {
     id           = auth0_action.dump-context.id
     display_name = auth0_action.dump-context.name
   }
+
+  actions {
+    id           = auth0_action.mfa-auto-enroll-pn.id
+    display_name = auth0_action.mfa-auto-enroll-pn.name
+  }
 }
 
 

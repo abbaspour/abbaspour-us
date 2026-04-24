@@ -6,3 +6,5 @@ terraform.auto.tfvars
 terraform.tfstate*
 events
 token-exchange-switch-client.tf
+asn-guardian-push-notification-firebase-adminsdk-fbsvc-d4d77e2aa0.json
+*.p12

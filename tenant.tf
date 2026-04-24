@@ -14,6 +14,8 @@ resource "auth0_tenant" "tenant" {
     "ar",
     "fa"
   ]
+
+  customize_mfa_in_postlogin_action = true
 }
 
 resource "auth0_prompt" "my_prompt" {
@@ -84,6 +86,7 @@ resource "auth0_connection_clients" "UPA-clients" {
     auth0_client.ios-auth0-airlines.client_id,
     auth0_client.mrrt-test-1.client_id,
     auth0_client.shared_device_passkey_spa.client_id,
+    auth0_client.auto-enroll.client_id,
     var.auth0_tf_client_id
   ]
 
