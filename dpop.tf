@@ -1,5 +1,6 @@
 resource "auth0_resource_server" "dpop-rs" {
   identifier = "dpop.rs"
+  name = "dpop.rs"
 }
 
 resource "auth0_resource_server_scopes" "dpop-rs-scopes" {

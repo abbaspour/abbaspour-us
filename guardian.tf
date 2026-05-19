@@ -1,6 +1,6 @@
 resource "auth0_guardian" "guardian_config" {
-  policy = "all-applications"
-  //policy = "never"
+  //policy = "all-applications"
+  policy = "never"
 
   email         = false
   otp           = false
