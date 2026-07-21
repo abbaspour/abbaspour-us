@@ -24,3 +24,32 @@ variable "linkedin_client_secret" {
   type = string
   description = "LinkedIn social connection client_secret"
 }
+
+## default passwords
+variable "default-password" {
+  type = string
+  sensitive = true
+}
+
+## Okta connections
+variable "okta-xaa-oidc-client-id" {
+  type = string
+  sensitive = false
+  default = "0oazy120g2EX2TRmD1d7"
+}
+
+variable "okta-xaa-oidc-client-secret" {
+  type = string
+  sensitive = true
+}
+
+variable "okta-integrator-oidc-client-id" {
+  type = string
+  sensitive = false
+  default = "0oa159itir7NDPfnX698"
+}
+
+variable "okta-integrator-oidc-client-secret" {
+  type = string
+  sensitive = true
+}

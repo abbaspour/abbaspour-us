@@ -6,7 +6,10 @@ resource "auth0_tenant" "tenant" {
 
   flags {
     enable_client_connections = false
+    enable_dynamic_client_registration = true # MCP
   }
+
+  resource_parameter_profile = "compatibility"  # MCP
 
   # Configure supported languages
   enabled_locales = [
@@ -95,7 +98,7 @@ resource "auth0_connection_clients" "UPA-clients" {
 resource "auth0_user" "test-user" {
   connection_name      = auth0_connection.Username-Password-Authentication.name
   email                = "amin@atko.email"
-  password             = "amin@atko.email"
+  password             = var.default-password
   custom_domain_header = "id.abbaspour.net"
 
   app_metadata = jsonencode(
