@@ -90,6 +90,8 @@ resource "auth0_connection_clients" "UPA-clients" {
     auth0_client.mrrt-test-1.client_id,
     auth0_client.shared_device_passkey_spa.client_id,
     auth0_client.auto-enroll.client_id,
+    auth0_client.samltool.client_id,
+    auth0_client.oidc-bash.client_id,
     var.auth0_tf_client_id
   ]
 
