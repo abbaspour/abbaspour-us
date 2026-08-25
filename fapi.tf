@@ -1,5 +1,5 @@
 resource "auth0_client" "par-client-vivaldi" {
-  name = "par-client-vivaldi"
+  name = "par-client-confidential"
 
   description     = "Client for FAPI 2.0 conformant OIDC EC PAR client"
   app_type        = "regular_web"
@@ -11,8 +11,14 @@ resource "auth0_client" "par-client-vivaldi" {
     alg = "RS256"
   }
 
+  refresh_token {
+    expiration_type = "non-expiring"
+    rotation_type   = "non-rotating"
+  }
+
   callbacks = [
     "https://fapi.local.dev.auth0.com/login/callback",
+    "https://par.abbaspour.net/login/callback",
     "http://local.abbaspour.net:1980/cgi-bin/cb.sh",
   ]
 
@@ -31,7 +37,7 @@ output "par-client-id" {
 }
 
 resource "auth0_client" "par-client-vivaldi-dpop" {
-  name = "par-client-vivaldi"
+  name = "par-client-confidential-dpop"
 
   description     = "Client for FAPI 2.0 conformant OIDC EC PAR client"
   app_type        = "regular_web"
@@ -43,8 +49,14 @@ resource "auth0_client" "par-client-vivaldi-dpop" {
     alg = "RS256"
   }
 
+  refresh_token {
+    expiration_type = "non-expiring"
+    rotation_type   = "non-rotating"
+  }
+
   callbacks = [
     "https://fapi.local.dev.auth0.com/login/callback",
+    "https://par.abbaspour.net/login/callback",
     "http://local.abbaspour.net:1980/cgi-bin/cb.sh",
   ]
 
@@ -61,4 +73,34 @@ resource "auth0_client" "par-client-vivaldi-dpop" {
 
 output "par-dpop-client-id" {
   value = auth0_client.par-client-vivaldi-dpop.client_id
+}
+
+# https://mcplay-gamma.vercel.app/amin
+resource "auth0_resource_server" "offline-rs" {
+  identifier = "offline-rs"
+  name = "offline-rs"
+  allow_offline_access = true
+  skip_consent_for_verifiable_first_party_clients = true
+
+  subject_type_authorization {
+
+    user {
+      policy = "allow_all"
+    }
+
+    client {
+      policy = "require_client_grant"
+    }
+  }
+
+
+}
+
+resource "auth0_resource_server_scopes" "offline-rs-scopes" {
+  resource_server_identifier = auth0_resource_server.offline-rs.identifier
+
+  scopes {
+    name = "do"
+    description = "just do it"
+  }
 }

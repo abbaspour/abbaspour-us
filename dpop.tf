@@ -1,6 +1,13 @@
 resource "auth0_resource_server" "dpop-rs" {
   identifier = "dpop.rs"
   name = "dpop.rs"
+  allow_offline_access = true
+
+  proof_of_possession {
+    required_for = "all_clients"
+    mechanism = "dpop"
+    required  = true
+  }
 }
 
 resource "auth0_resource_server_scopes" "dpop-rs-scopes" {
