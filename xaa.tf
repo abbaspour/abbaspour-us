@@ -34,6 +34,10 @@ resource "auth0_client" "agent0" {
     "refresh_token",
     "implicit"
   ]
+
+  identity_assertion_authorization_grant {
+    active = true
+  }
 }
 
 output "agent0-client_id" {
@@ -82,6 +86,11 @@ resource "auth0_connection" "okta-xaa" {
     #   })
     # }
   }
+
+  cross_app_access_resource_app {
+    status = "enabled"
+  }
+
 }
 
 resource "auth0_connection_clients" "xaa-okta-xaa-clients" {
@@ -111,6 +120,10 @@ resource "auth0_connection" "okta-integrator" {
     connection_settings {
       pkce = "auto"
     }
+  }
+
+  cross_app_access_resource_app {
+    status = "enabled"
   }
 }
 
