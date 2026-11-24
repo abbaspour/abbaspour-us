@@ -1,17 +1,17 @@
 # Native application client
 resource "auth0_client" "singpass-jwt-io" {
-  name                       = "singpass-jwt-io"
-  description                = "singpass-jwt-io"
-  app_type                   = "native"
-  is_first_party             = true
-  oidc_conformant            = true
+  name            = "singpass-jwt-io"
+  description     = "singpass-jwt-io"
+  app_type        = "native"
+  is_first_party  = true
+  oidc_conformant = true
 
   callbacks = [
     "https://jwt.io"
   ]
 
   allowed_logout_urls = []
-  web_origins = []
+  web_origins         = []
 
   grant_types = [
     "implicit"
@@ -28,13 +28,13 @@ resource "auth0_connection" "oidc" {
   strategy = "oidc"
 
   options {
-    client_id                       = "OMaeWMfqhId0wwR4FGs7gGgCDCUYNqgW"
-    scopes                          = ["openid", "profile"]
-    issuer                          = "https://stg-id.singpass.gov.sg"
-    authorization_endpoint          = "https://stg-id.singpass.gov.sg/auth"
-    jwks_uri                        = "https://stg-id.singpass.gov.sg/.well-known/keys"
-    token_endpoint                  = "https://stg-id.singpass.gov.sg/token"
-    type                            = "back_channel"
+    client_id              = "OMaeWMfqhId0wwR4FGs7gGgCDCUYNqgW"
+    scopes                 = ["openid", "profile"]
+    issuer                 = "https://stg-id.singpass.gov.sg"
+    authorization_endpoint = "https://stg-id.singpass.gov.sg/auth"
+    jwks_uri               = "https://stg-id.singpass.gov.sg/.well-known/keys"
+    token_endpoint         = "https://stg-id.singpass.gov.sg/token"
+    type                   = "back_channel"
     #discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
     token_endpoint_auth_method      = "private_key_jwt"
     token_endpoint_auth_signing_alg = "RS256"
@@ -45,7 +45,7 @@ resource "auth0_connection" "oidc" {
 resource "auth0_connection_keys" "singpass_keys" {
   connection_id = auth0_connection.oidc.id
 
-  
+
   triggers = {
     version = "1"
     date    = "2023-10-01T00:00:00Z"
@@ -58,15 +58,17 @@ resource "auth0_connection" "singpass" {
   strategy = "oidc"
 
   options {
-    client_id                       = "wgQVLL3CBULMXwwJkPncoBYypXEabGeD"
-    scopes                          = ["openid"]
-    issuer                          = "https://stg-id.singpass.gov.sg"
-    authorization_endpoint          = "https://stg-id.singpass.gov.sg/auth"
-    jwks_uri                        = "https://stg-id.singpass.gov.sg/.well-known/keys"
+    client_id              = "wgQVLL3CBULMXwwJkPncoBYypXEabGeD"
+    scopes                 = ["openid"]
+    issuer                 = "https://stg-id.singpass.gov.sg"
+    authorization_endpoint = "https://stg-id.singpass.gov.sg/auth"
+    jwks_uri               = "https://stg-id.singpass.gov.sg/.well-known/keys"
     #token_endpoint                  = "https://stg-id.singpass.gov.sg/token"
     #token_endpoint                  = "https://logging-token-endpoint.abbaspour.workers.dev"
-    type                            = "back_channel"
-    discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
+    type          = "back_channel"
+    discovery_url = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
+    #discovery_url                   = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
+    send_back_channel_nonce         = true
     token_endpoint_auth_method      = "private_key_jwt"
     token_endpoint_auth_signing_alg = "ES256"
     #pkce_enabled = true
@@ -87,3 +89,44 @@ resource "auth0_connection" "singpass" {
   }
 }
 */
+
+// this is pointing to https://id.abbaspour.net/oauth/connection/singpass-stg-fapi/.well-known/jwks.json
+resource "auth0_connection" "singpass-stg-fapi" {
+  name     = "singpass-stg-fapi"
+  strategy = "oidc"
+
+  options {
+    client_id = "6P6h5Qxo9DezqQYz64j7ODBZGQHjfxzb"
+    scopes    = ["openid"]
+    #issuer                          = "https://stg-id.singpass.gov.sg"
+    #authorization_endpoint          = "https://stg-id.singpass.gov.sg/auth"
+    #jwks_uri                        = "https://stg-id.singpass.gov.sg/.well-known/keys"
+    type          = "back_channel"
+    discovery_url = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
+    token_endpoint_auth_method      = "private_key_jwt"
+    token_endpoint_jwtca_aud_format = "issuer"
+    token_endpoint_auth_signing_alg = "ES256"
+    send_back_channel_nonce         = true
+    dpop_signing_alg = "ES256"
+    connection_settings {
+      pkce = "S256"
+    }
+    upstream_params = jsonencode({
+      "authentication_context_type" : {
+        "value" : "APP_AUTHENTICATION_DEFAULT"
+      }
+    })
+  }
+}
+
+resource "auth0_connection_clients" "singpass-fapi-clients" {
+  connection_id = auth0_connection.singpass-stg-fapi.id
+  enabled_clients = [
+    auth0_client.singpass-jwt-io.id
+  ]
+}
+
+output "singpass-fapi-connection-id" {
+  value = auth0_connection.singpass-stg-fapi.id
+}
+

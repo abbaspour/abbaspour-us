@@ -23,7 +23,7 @@ resource "auth0_tenant" "tenant" {
 
 resource "auth0_prompt" "my_prompt" {
   universal_login_experience     = "new"
-  identifier_first               = false
+  identifier_first               = true
   webauthn_platform_first_factor = false
 }
 
@@ -94,6 +94,7 @@ resource "auth0_connection_clients" "UPA-clients" {
     auth0_client.oidc-bash.client_id,
     auth0_client.par-client-vivaldi.client_id,
     auth0_client.par-client-vivaldi-dpop.client_id,
+    //auth0_client.jwe-client-vivaldi.client_id,
     var.auth0_tf_client_id
   ]
 
