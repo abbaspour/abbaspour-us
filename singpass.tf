@@ -65,9 +65,9 @@ resource "auth0_connection" "singpass" {
     jwks_uri               = "https://stg-id.singpass.gov.sg/.well-known/keys"
     #token_endpoint                  = "https://stg-id.singpass.gov.sg/token"
     #token_endpoint                  = "https://logging-token-endpoint.abbaspour.workers.dev"
-    type                            = "back_channel"
-    #discovery_url                   = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
-    discovery_url                   = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
+    type          = "back_channel"
+    discovery_url = "https://stg-id.singpass.gov.sg/.well-known/openid-configuration"
+    #discovery_url                   = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
     send_back_channel_nonce         = true
     token_endpoint_auth_method      = "private_key_jwt"
     token_endpoint_auth_signing_alg = "ES256"
@@ -96,20 +96,26 @@ resource "auth0_connection" "singpass-stg-fapi" {
   strategy = "oidc"
 
   options {
-    client_id = "wgQVLL3CBULMXwwJkPncoBYypXEabGeD"
+    client_id = "6P6h5Qxo9DezqQYz64j7ODBZGQHjfxzb"
     scopes    = ["openid"]
     #issuer                          = "https://stg-id.singpass.gov.sg"
     #authorization_endpoint          = "https://stg-id.singpass.gov.sg/auth"
     #jwks_uri                        = "https://stg-id.singpass.gov.sg/.well-known/keys"
-    type                            = "back_channel"
-    discovery_url                   = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
+    type          = "back_channel"
+    discovery_url = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
     token_endpoint_auth_method      = "private_key_jwt"
+    token_endpoint_jwtca_aud_format = "issuer"
     token_endpoint_auth_signing_alg = "ES256"
     send_back_channel_nonce         = true
-    #pkce_enabled                    = true
+    dpop_signing_alg = "ES256"
     connection_settings {
       pkce = "S256"
     }
+    upstream_params = jsonencode({
+      "authentication_context_type" : {
+        "value" : "APP_AUTHENTICATION_DEFAULT"
+      }
+    })
   }
 }
 
