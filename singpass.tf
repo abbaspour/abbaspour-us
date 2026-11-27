@@ -96,18 +96,15 @@ resource "auth0_connection" "singpass-stg-fapi" {
   strategy = "oidc"
 
   options {
-    client_id = "6P6h5Qxo9DezqQYz64j7ODBZGQHjfxzb"
-    scopes    = ["openid"]
-    #issuer                          = "https://stg-id.singpass.gov.sg"
-    #authorization_endpoint          = "https://stg-id.singpass.gov.sg/auth"
-    #jwks_uri                        = "https://stg-id.singpass.gov.sg/.well-known/keys"
-    type          = "back_channel"
-    discovery_url = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
+    client_id                       = "6P6h5Qxo9DezqQYz64j7ODBZGQHjfxzb"
+    scopes                          = ["openid", "user.identity", "email", "mobileno", "name"]
+    type                            = "back_channel"
+    discovery_url                   = "https://stg-id.singpass.gov.sg/fapi/.well-known/openid-configuration"
     token_endpoint_auth_method      = "private_key_jwt"
     token_endpoint_jwtca_aud_format = "issuer"
     token_endpoint_auth_signing_alg = "ES256"
     send_back_channel_nonce         = true
-    dpop_signing_alg = "ES256"
+    dpop_signing_alg                = "ES256"
     connection_settings {
       pkce = "S256"
     }
